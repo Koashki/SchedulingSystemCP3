@@ -384,9 +384,9 @@ public class ComProgUI extends javax.swing.JFrame {
         
        
        if(txtweekly.isSelected()) 
-         options="weekly";
+         options="Weekly";
        else if(txtmonthly.isSelected()) 
-         options="monthly";
+         options="Monthly";
     
        String parti = txtpart.getText();
        
