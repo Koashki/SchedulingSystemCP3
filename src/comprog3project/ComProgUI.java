@@ -90,6 +90,8 @@ public class ComProgUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         kButton1 = new com.k33ptoo.components.KButton();
         kButton2 = new com.k33ptoo.components.KButton();
@@ -104,8 +106,6 @@ public class ComProgUI extends javax.swing.JFrame {
         txtstart = new com.github.lgooddatepicker.components.TimePicker();
         jLabel5 = new javax.swing.JLabel();
         txtdate = new com.github.lgooddatepicker.components.DatePicker();
-        txtweekly = new javax.swing.JCheckBox();
-        txtmonthly = new javax.swing.JCheckBox();
         txtpart = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -113,6 +113,9 @@ public class ComProgUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtmd = new javax.swing.JTextArea();
         kButton3 = new com.k33ptoo.components.KButton();
+        txtmonthly = new javax.swing.JRadioButton();
+        txtweekly = new javax.swing.JRadioButton();
+        txtnone = new javax.swing.JRadioButton();
         pnlTab2 = new keeptoo.KGradientPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -205,10 +208,6 @@ public class ComProgUI extends javax.swing.JFrame {
         jLabel5.setText("End Time");
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtweekly.setText("Weekly");
-
-        txtmonthly.setText("Monthly");
-
         jLabel8.setText("Meeting Option");
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -230,6 +229,15 @@ public class ComProgUI extends javax.swing.JFrame {
                 kButton3ActionPerformed(evt);
             }
         });
+
+        buttonGroup1.add(txtmonthly);
+        txtmonthly.setText("Monthly");
+
+        buttonGroup1.add(txtweekly);
+        txtweekly.setText("Weekly");
+
+        buttonGroup1.add(txtnone);
+        txtnone.setText("None");
 
         javax.swing.GroupLayout pnlTab1Layout = new javax.swing.GroupLayout(pnlTab1);
         pnlTab1.setLayout(pnlTab1Layout);
@@ -260,11 +268,13 @@ public class ComProgUI extends javax.swing.JFrame {
                                     .addComponent(txtend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtstart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtpart, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(pnlTab1Layout.createSequentialGroup()
-                                        .addComponent(txtmonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtweekly, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtpart, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtweekly, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtmonthly, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtnone, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(55, 55, 55))
             .addGroup(pnlTab1Layout.createSequentialGroup()
@@ -299,16 +309,17 @@ public class ComProgUI extends javax.swing.JFrame {
                     .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
                     .addComponent(txtweekly)
                     .addComponent(txtmonthly)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                    .addComponent(txtnone))
+                .addGap(15, 15, 15)
                 .addGroup(pnlTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtpart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(33, 33, 33)
                 .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pnlMain.add(pnlTab1, "card3");
@@ -387,9 +398,21 @@ public class ComProgUI extends javax.swing.JFrame {
          options="Weekly";
        else if(txtmonthly.isSelected()) 
          options="Monthly";
+       else if(txtnone.isSelected()){
+         options="None";
+       }
+      
     
        String parti = txtpart.getText();
        
+       if (mmeet.isEmpty() || mmd.isEmpty() || mstart.isEmpty() || mend.isEmpty() || startd.isEmpty() || parti.isEmpty() && options.equals("None")) {
+            JOptionPane.showMessageDialog(this, "Please fill in all required fields");
+       return;
+    
+       
+        }int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to save the schedule?", "Save Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (confirmation == JOptionPane.YES_OPTION) {
         try {
             pst = con.prepareStatement("insert into meetingdata(meetingname,description,starttime,endtime,startdate,meetingoption,participants)values(?,?,?,?,?,?,?)");
             pst.setString(1, mmeet);
@@ -418,7 +441,7 @@ public class ComProgUI extends javax.swing.JFrame {
             Logger.getLogger(ComProgUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_kButton3ActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -455,6 +478,8 @@ public class ComProgUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -477,9 +502,10 @@ public class ComProgUI extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.TimePicker txtend;
     private javax.swing.JTextArea txtmd;
     private javax.swing.JTextField txtmeet;
-    private javax.swing.JCheckBox txtmonthly;
+    private javax.swing.JRadioButton txtmonthly;
+    private javax.swing.JRadioButton txtnone;
     private javax.swing.JTextField txtpart;
     private com.github.lgooddatepicker.components.TimePicker txtstart;
-    private javax.swing.JCheckBox txtweekly;
+    private javax.swing.JRadioButton txtweekly;
     // End of variables declaration//GEN-END:variables
 }
