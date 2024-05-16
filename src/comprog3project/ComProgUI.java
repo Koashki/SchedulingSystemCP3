@@ -29,6 +29,8 @@ public class ComProgUI extends javax.swing.JFrame {
         initComponents();
         Connect();
         MeetingTable();
+        setTitle("Meeting Scheduling System");
+        setResizable(false);
     }
     Connection con;
     PreparedStatement pst;
